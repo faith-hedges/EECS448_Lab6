@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<h1> Houses for sale
+<link rel="stylesheet" type="text/css" href="customerFrontend.css" />
+</h1>
+
+<form action="customerBackend.php" method="post" id="quiz">
+
+<div class="card">
+  <img src="mediterranean.png" alt="Mediterranean" style="width:100%">
+  <h1>Mediterranean</h1>
+  <p class="price">$40,000,000</p>
+  <p> <div id="total-count"></div></p>
+  <p><button type="button" id="addtocart">Add to Cart</button></p>
+</div>
+
+<div class="card">
+  <img src="modern.png" alt="Modern" style="width:100%">
+  <h1>Modern</h1>
+  <p class="price">30,000,000</p>
+  <p> <div id="total-count2"></div></p>
+  <p><button type="button" id="addtocart2">Add to Cart</button></p>
+
+</div>
+
+<div class="card">
+  <img src="tropical.png" alt="Tropical" style="width:100%">
+  <h1>Tropical</h1>
+  <p class="price">$20,000,000</p>
+  <p> <div id="total-count3"></div></p>
+  <p><button type="button" id="addtocart3">Add to Cart</button></p>
+</div>
+
+<div class="card">
+  <img src="neoclassical.png" alt="Neoclassical" style="width:100%">
+  <h1>Neoclassical</h1>
+  <p class="price">$10,000,000</p>
+  <p> <div id="total-count4"></div></p>
+  <p><button type="button" id="addtocart4">Add to Cart</button></p>
+</div>
+
+<button type="button" class="clearButton" id=clearButton>Clear</button>
+
+
+  <h2>Shipping for the title of the house(s)</h2>
+  <div>
+    <input type="radio" name="shipping" id="shipping-A" value="7day" checked="true"/>
+    <label for="q1">Free 7-day </label>
+  </div>
+  <div>
+    <input type="radio" name="shipping" id="shipping-B" value="50.00" />
+    <label for="q1">$50.00 over night </label>
+  </div>
+  <div>
+    <input type="radio" name="shipping" id="shipping-C" value="5.00" />
+    <label for="q1">$5.00 three day </label>
+  </div>
+
+  <h2>Enter an email address</h2>
+  <p>Email</p>
+  <input type="text" name="email" id="email"/>
+  <p>Password</p>
+  <input type="password" name="password" id="password" />
+  <br><br>
+
+  <h2>Confirm quantities</h2>
+  <h3>Mediterranean:</h3>
+  <input type="number" min=0 name="mediterranean" id="mediterranean" />
+  <h3>Modern:</h3>
+  <input type="number" min=0 name="modern" id="modern" />
+  <h3>Tropical:</h3>
+  <input type="number" min=0 name="tropical" id="tropical" />
+  <h3>Neoclassical:</h3>
+  <input type="number" min=0 name="neoclassical" id="neoclassical" />
+
+  <script src="formChecker.js"></script>
+  <!-- <button type="button" value="Checkout" class="submitButton" onclick= >Submit</button> -->
+  <input type="submit" value="Checkout" class="submitButton" onclick=checkEmail()>
+  </form>
+
+
+
+<script>
+
+
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+
+const checkEmail = () => {
+  var format = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if(email.value.match(format) && password.value!="" && checkNumbers())
+  {
+    return true;
+  }
+  else
+  {
+    if(!email.value.match(format))
+    {
+      alert("Invalid email");
+    }
+    else if(password.value=="")
+    {
+      alert("Invalid password");
+    }
+    else
+    {
+      alert("Quantities cannot be negative")
+    }
+    event.preventDefault();
+    return false;
+  }
+};
+
+const incrementCount = document.getElementById("addtocart");
+const incrementCount2 = document.getElementById("addtocart2");
+const incrementCount3 = document.getElementById("addtocart3");
+const incrementCount4 = document.getElementById("addtocart4");
+
+const totalCount = document.getElementById("total-count");
+const totalCount2 = document.getElementById("total-count2");
+const totalCount3 = document.getElementById("total-count3");
+const totalCount4 = document.getElementById("total-count4");
+
+var count = 0;
+var count2 = 0;
+var count3 = 0;
+var count4 = 0;
+
+totalCount.innerHTML = count;
+totalCount2.innerHTML = count;
+totalCount3.innerHTML = count;
+totalCount4.innerHTML = count;
+
+const getCount = () => {
+  return totalCount;
+}
+
+const handleIncrement = () => {
+  count++;
+  totalCount.innerHTML = count;
+};
+
+const handleIncrement2 = () => {
+  count2++;
+  totalCount2.innerHTML = count2;
+};
+
+const handleIncrement3 = () => {
+  count3++;
+  totalCount3.innerHTML = count3;
+};
+
+const handleIncrement4 = () => {
+  count4++;
+  totalCount4.innerHTML = count4;
+};
+
+
+const clear = () => {
+  totalCount.innerHTML = 0;
+  totalCount2.innerHTML = 0;
+  totalCount3.innerHTML = 0;
+  totalCount4.innerHTML = 0;
+}
+clearButton.addEventListener("click", clear);
+
+incrementCount.addEventListener("click", handleIncrement);
+incrementCount2.addEventListener("click", handleIncrement2);
+incrementCount3.addEventListener("click", handleIncrement3);
+incrementCount4.addEventListener("click", handleIncrement4);
+
+decrementCount.addEventListener("click", handleDecrement);
+
+</script>
